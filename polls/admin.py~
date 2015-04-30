@@ -1,0 +1,10 @@
+from django.contrib import admin
+from polls.models import Choice, Question
+
+class ChoiceInline(admin.StackedInline):
+    model = Choice
+    extra = 3
+
+class PollAdmin(admin.ModelAdmin):
+    list_display = ('question_text', 'pub_date')
+admin.site.register(Question, PollAdmin)

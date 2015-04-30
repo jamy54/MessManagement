@@ -1,0 +1,113 @@
+{% load staticfiles %}
+
+<!DOCTYPE HTML>
+<!-- Website template by freewebsitetemplates.com -->
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>No Name</title>
+
+	<link rel="stylesheet" href="{% static 'polls/style.css' %}" type="text/css">
+	<script src="{% static 'polls/js/jquery.js' %}"></script>
+	<script src="{% static 'polls/js/index.js' %}"></script>
+</head>
+<body>
+	<div id="header">
+		<div>
+			<!--
+            <div class="logo">
+				<a href="index">Zero Type</a>
+			</div>
+			-->
+			<ul id="navigation">
+				<li class="active">
+					<a href="index">Home</a>
+				</li>
+				<li>
+					<a href="features">Features</a>
+				</li>
+				<li>
+					<a href="news">News</a>
+				</li>
+				<li>
+					<a href="about">About</a>
+				</li>
+				<li>
+					<a href="contact">Contact</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<!--
+    <div id="adbox">
+		<div class="clearfix">
+			<img src="{% static 'polls/images/box.png' %}" alt="Img" height="342" width="368">
+			<div>
+				<h1>Ideas?</h1>
+				<h2>That's what we live for.</h2>
+				<p>
+					Wix is an online website builder with a simple drag & drop interface, meaning you do the work online and instantly publish to the web. <span><a href="index" class="btn">Try It Now!</a><b>Don’t worry it’s for free</b></span>
+				</p>
+			</div>
+		</div>
+	</div>
+	-->
+	<div id="contents">
+		<div id="tagline" class="clearfix">
+			<h1>Let's keep Estimation</h1>
+
+
+            <div id='error' style='color: #F00; float: left;'></div>	
+            <span style='clear: both;'></span>
+            <span style='float: right; padding-right: 150px;'>
+	            <select style='height: 30px;  background-color: #FFF; border: 3px solid #EEE;' id='myselect'></select>
+	            		<br>
+	            		<span style='' id="catInp" >
+	            		<input type="text" id='catInpTxt' name=""  value="cetagory" onFocus="this.select();" onMouseOut="javascript:return false;" style=' width: 100px; border: 1px solid #DDD; height: 30px; color: #CCC;'/>
+
+	            		<input type="button" id='catBtn' name='catBtn' value='OK' style=' float: left; background-color: #EEE; border: 1px solid #CCC; color: #999; width: 50px; height: 30px;'/>
+	            		</span>
+	            
+           </span>
+            <span style='clear: both;'></span>
+            
+            <form method='post' action='insertMeal' class="mealValue" id="mealForm" style='float: left; margin-top: 0px;' >
+	</form>
+			<!--
+            <div>
+				<p>
+					You can replace all this text with your own text. Want an easier solution for a Free Website?
+				</p>
+				<p>
+					Head straight to Wix and immediately start customizing your website!
+				</p>
+				<p>
+					Wix is an online website builder with a simple drag & drop interface, meaning you do the work online and instantly publish to the web.
+				</p>
+			</div>
+			<div>
+				<p>
+					You can replace all this text with your own text. Want an easier solution for a Free Website?
+				</p>
+				<p>
+					Head straight to Wix and immediately start customizing your website!
+				</p>
+				<p>
+					Wix is an online website builder with a simple drag & drop interface, meaning you do the work online and instantly publish to the web.
+				</p>
+			</div>
+			-->
+		</div>
+	</div>
+	<div id="footer">
+		<div class="clearfix">
+			<div id="connect">
+				<a href="http://freewebsitetemplates.com/go/facebook/" target="_blank" class="facebook"></a><a href="http://freewebsitetemplates.com/go/googleplus/" target="_blank" class="googleplus"></a><a href="http://freewebsitetemplates.com/go/twitter/" target="_blank" class="twitter"></a><a href="http://www.freewebsitetemplates.com/misc/contact/" target="_blank" class="tumbler"></a>
+			</div>
+			<p>
+				© Me, All Rights Reserved.
+			</p>
+		</div>
+	</div>
+</body>
+</html>
