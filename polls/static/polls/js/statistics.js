@@ -3,10 +3,7 @@ $(document).ready(function() {
 	var month = d.getMonth()+1;
 	var year = d.getFullYear();
 
-	if(month < d.getMonth()+1){
-		$('#next').show();
-	}
-	else{$('#next').hide();}
+	$('#next').hide();
 
 	function showCatagory(myOptions){
 		var mySelect = $('#myselect');
@@ -55,15 +52,15 @@ $(document).ready(function() {
 	function showAllData(data){
 		//alert(data[0].dayData.length);
 		for(k=0;k<data.length;k++){
-			if(data[0].dayData.length !=0){
+			if(data[k].dayData.length !=0){
 				var daData="";
 				var pers = []
 				var header = "<tr><th>Date</th>";
 				for(i=0;i<data[k].dayData.length;i++){
 					var persData="";
-					for(j=0;j<data[0].dayData[0].personalData.length;j++){
+					for(j=0;j<data[k].dayData[i].personalData.length;j++){
 						persData = persData +'\
-						<td>'+data[0].dayData[i].personalData[j].expenditure+'-'+data[0].dayData[i].personalData[j].quantity+'</td>';
+						<td>'+data[k].dayData[i].personalData[j].expenditure+'/'+data[k].dayData[i].personalData[j].quantity+'</td>';
 					}
 					pers[i] = persData;
 				}
@@ -71,22 +68,48 @@ $(document).ready(function() {
 				for(i=0;i<data[k].dayData.length;i++){
 					daData = daData +'\
 					<tr>\
-					<td>'+data[0].dayData[i].date+'</td>\
+					<td>'+data[k].dayData[i].date+'</td>\
 					'+pers[i]+'\
 					</tr>'
 				}
 				
 				for(j=0;j<data[0].dayData[0].personalData.length;j++){
 					header = header +'\
-					<th>'+data[0].dayData[0].personalData[j].name+'</th>\
+					<th>'+data[0].dayData[0].personalData[j].name+'<br><small>(Expend/Share)</small></th>\
 					';
 				}
-				
-				header = header + '</tr>';
-				if(data[k].dayData.length !=0){
-					$("#AllData").append("<h1>"+data[k].catagoryName+"</h1>");
-					$("#AllData").append("<table class='bordered'>"+header+daData+"</table><br>");
+
+				var totalExpenditure = 0;
+				var totalQuantitiy = 0;
+				for(i=0;i<data[k].dayData.length;i++){
+					for(j=0;j<data[k].dayData[i].personalData.length;j++){
+						totalExpenditure += data[k].dayData[i].personalData[j].expenditure;
+						totalQuantitiy += data[k].dayData[i].personalData[j].quantity;
+					}
 				}
+
+				var len = data[k].dayData[0].personalData.length;
+				var persQua = [len]
+				while (--len >= 0) {
+				        persQua[len] = 0;
+				}
+
+				for(i=0;i<data[k].dayData.length;i++){
+					for(j=0;j<data[k].dayData[i].personalData.length;j++){
+						persQua[j] += data[k].dayData[i].personalData[j].quantity;
+					}
+				}
+				var result = "<tr><td><b>Total<br>"+totalExpenditure+"/"+totalQuantitiy+"<b></td>"
+				for(j=0;j<data[k].dayData[0].personalData.length;j++){
+						dat = parseFloat(((totalExpenditure/totalQuantitiy)*persQua[j]).toPrecision(5));
+						result += "<td>"+dat+"/"+persQua[j]+"</td>";
+				}
+				result += "</tr>"
+				header = header + '</tr>';
+
+				$("#AllData").append("<h1>"+data[k].catagoryName+"</h1>");
+				$("#AllData").append("<table class='bordered'>"+header+daData+result+"</table><br>");
+				
 			}
 		}
 	}
@@ -110,11 +133,11 @@ $(document).ready(function() {
 			year = year -1;
 		}
 		if(month < d.getMonth()+1){
-			$('#next').show();
+			$('#next').fadeIn(2000);
 		}
-		else{$('#next').hide();}
+		else{$('#next').fadeOut('slow');}
 
-		$("#AllData").hide();
+		//$("#AllData").hide();
 	     	$("#AllData").html('');
 	     	allData = postCall({'catId':0,'month':month,'year':year},'getInfo');
 		showAllData(allData);
@@ -128,12 +151,13 @@ $(document).ready(function() {
 			year = year +1;
 		}
 		if(month < d.getMonth()+1){
-			$('#next').show();
+			$('#next').fadeIn(2000);
 		}
-		else{$('#next').hide();}
+		else{$('#next').fadeOut('slow');}
 
-		$("#AllData").hide();
+		//$("#AllData").hide();
 	     	$("#AllData").html('');
+	     	$("#AllData").hide();
 	     	allData = postCall({'catId':0,'month':month,'year':year},'getInfo');
 		showAllData(allData);
 		$("#AllData").show('slow');
@@ -143,10 +167,11 @@ $(document).ready(function() {
 	             var optionSelected = $(this).find("option:selected");
 	             var valSelected   = optionSelected.val();
 	             var textSelected   = optionSelected.text();
-	     	$("#AllData").hide();
+	     	//$("#AllData").fadeOut(2000);
 	     	$("#AllData").html('');
+	     	$("#AllData").hide();
 	     	allData = postCall({'catId':valSelected,'month':month,'year':year},'getInfo');
 		showAllData(allData);
-		$("#AllData").show('slow');
+		$("#AllData").fadeIn(2000);
 	});
 });

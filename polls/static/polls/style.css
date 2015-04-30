@@ -71,6 +71,28 @@ img {
 	text-decoration: none;
 	text-transform: uppercase;
 }
+
+#prev a {
+	 color: #777;
+}
+#prev{
+	background: url(images/leftArrow.png) no-repeat;
+	width: 500px;
+	height: 500px;
+	position: fixed;
+	top:250px; 
+	left: 0px;
+}
+
+#next{
+	background: url(images/rightArrow.png) no-repeat;
+	width: 500px;
+	height: 500px;
+	position: fixed;
+	top:250px; 
+	right: -50px;
+}
+
 /** Navigation **/
 #navigation {
 	display: inline-block;
